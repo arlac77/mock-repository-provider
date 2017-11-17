@@ -1,7 +1,7 @@
 {
   "name": "mock-repository-provider",
   "version": "0.0.0-semantic-release",
-  "description": "repository provider for bitbucket",
+  "description": "mockin repository provider",
   "main": "dist/mock-repository-provider.js",
   "module": "src/mock-repository-provider.js",
   "scripts": {
@@ -35,7 +35,8 @@
     "rollup": "^0.51.7",
     "rollup-plugin-multi-entry": "^2.0.2",
     "semantic-release": "^9.1.1",
-    "xo": "^0.19.0"
+    "xo": "^0.19.0",
+    "rollup-plugin-babel": "^3.0.2"
   },
   "release": {},
   "keywords": ["git", "bitbucket"],
