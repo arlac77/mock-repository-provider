@@ -19,7 +19,7 @@
     "url": "git+https://github.com/arlac77/mock-repository-provider.git"
   },
   "engines": {
-    "node": ">=8.9.2"
+    "node": ">=8.9.3"
   },
   "dependencies": {
     "repository-provider": "^2.0.0"
