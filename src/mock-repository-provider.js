@@ -34,6 +34,9 @@ export class MockRepository extends Repository {
   }
 }
 
+/**
+ * @param {Object} files
+ */
 export class MockProvider extends Provider {
   constructor(files) {
     super();
