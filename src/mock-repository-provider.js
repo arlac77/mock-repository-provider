@@ -13,11 +13,6 @@ export class MockBranch extends Branch {
       //throw new Error(`missing ${path}`);
     }
 
-    /*
-    console.log(
-      `content: ${path} -> ${this.provider.files[path][this.repository.name]}`
-    );
-*/
     return this.provider.files[path][this.repository.name];
 
     //return Buffer.from(this.provider.files[path][this.repository.name], 'utf8');
@@ -43,6 +38,14 @@ export class MockProvider extends Provider {
     Object.defineProperty(this, 'files', {
       value: files
     });
+  }
+
+  get branchClass() {
+    return MockBranch;
+  }
+
+  get repositoryClass() {
+    return MockRepository;
   }
 
   async repository(name) {
