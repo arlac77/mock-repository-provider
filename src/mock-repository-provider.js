@@ -2,30 +2,31 @@ import { Provider, Repository, Branch } from 'repository-provider';
 
 export class MockBranch extends Branch {
   async content(path, options = {}) {
-    if (
-      this.provider.files[path] === undefined ||
-      this.provider.files[path][this.repository.name] === undefined
-    ) {
+    if (this.files[path] === undefined) {
       if (options.ignoreMissing) {
         return '';
       }
-      return '';
-      //throw new Error(`missing ${path}`);
+      return undefined;
     }
 
-    return this.provider.files[path][this.repository.name];
+    return this.files[path];
+  }
 
-    //return Buffer.from(this.provider.files[path][this.repository.name], 'utf8');
+  get files() {
+    return this.repository.files[this.name];
   }
 }
 
 export class MockRepository extends Repository {
-  async branch(name) {
-    return new MockBranch(this, name);
+  get files() {
+    return this.provider.files[this.name];
   }
 
-  async branches() {
-    return [new MockBranch(this)];
+  async initialize() {
+    await super.initialize();
+    await Promise.all(
+      Object.keys(this.files).map(branchName => this.createBranch(branchName))
+    );
   }
 }
 
@@ -40,15 +41,17 @@ export class MockProvider extends Provider {
     });
   }
 
+  async initialize() {
+    return Promise.all(
+      Object.keys(this.files).map(repoName => this.createRepository(repoName))
+    );
+  }
+
   get branchClass() {
     return MockBranch;
   }
 
   get repositoryClass() {
     return MockRepository;
-  }
-
-  async repository(name) {
-    return new MockRepository(this, name);
   }
 }
