@@ -27,6 +27,7 @@ mocking repository provider
 ### Table of Contents
 
 -   [MockProvider](#mockprovider)
+    -   [url](#url)
 
 ## MockProvider
 
@@ -35,6 +36,10 @@ mocking repository provider
 **Parameters**
 
 -   `files` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+### url
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** '<http://mock-provider.com>'
 
 # install
 

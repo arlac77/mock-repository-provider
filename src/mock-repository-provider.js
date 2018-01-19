@@ -28,6 +28,10 @@ export class MockRepository extends Repository {
       Object.keys(this.files).map(branchName => this.createBranch(branchName))
     );
   }
+
+  get url() {
+    return `${this.provider.url}/${this.name}`;
+  }
 }
 
 /**
@@ -45,6 +49,13 @@ export class MockProvider extends Provider {
     return Promise.all(
       Object.keys(this.files).map(repoName => this.createRepository(repoName))
     );
+  }
+
+  /**
+   * @return {string} 'http://mock-provider.com'
+   */
+  get url() {
+    return 'http://mock-provider.com';
   }
 
   get branchClass() {

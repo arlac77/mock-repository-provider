@@ -11,7 +11,7 @@ const files = {
 
 test('provider repository', async t => {
   const provider = new MockProvider(files);
-  //await provider.initialize();
+  t.is(provider.url, 'http://mock-provider.com');
 
   const r = await provider.repository('repo1');
   t.is(r.name, 'repo1');
@@ -25,6 +25,7 @@ test('provider branch', async t => {
 
   const b = await provider.branch('repo1#master');
   t.is(b.name, 'master');
+  t.is(b.url, 'http://mock-provider.com/repo1');
 });
 
 test('repository content', async t => {
