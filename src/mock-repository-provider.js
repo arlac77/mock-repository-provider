@@ -32,6 +32,14 @@ export class MockRepository extends Repository {
   get url() {
     return `${this.provider.url}/${this.name}`;
   }
+
+  get homePageURL() {
+    return `${this.url}#readme`;
+  }
+
+  get issuesURL() {
+    return `${this.url}/issues`;
+  }
 }
 
 /**

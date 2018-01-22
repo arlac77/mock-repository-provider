@@ -15,6 +15,9 @@ test('provider repository', async t => {
 
   const r = await provider.repository('repo1');
   t.is(r.name, 'repo1');
+  t.is(r.url, 'http://mock-provider.com/repo1');
+  t.is(r.homePageURL, 'http://mock-provider.com/repo1#readme');
+  t.is(r.issuesURL, 'http://mock-provider.com/repo1/issues');
   const b = await r.branch('master');
   t.is(b.name, 'master');
 });
