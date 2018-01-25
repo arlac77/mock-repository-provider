@@ -24,7 +24,6 @@ test('provider repository', async t => {
 
 test('provider branch', async t => {
   const provider = new MockProvider(files);
-  //await provider.initialize();
 
   const b = await provider.branch('repo1#master');
   t.is(b.name, 'master');
@@ -33,17 +32,16 @@ test('provider branch', async t => {
 
 test('repository content', async t => {
   const provider = new MockProvider(files);
-  //await provider.initialize();
 
-  t.is(await (await provider.repository('repo1')).content('aFile'), 'content');
+  const c = await (await provider.repository('repo1')).content('aFile');
+
+  t.is(c.content, 'content');
 });
 
 test('branch content', async t => {
   const provider = new MockProvider(files);
-  //await provider.initialize();
 
-  t.is(
-    await (await provider.branch('repo1#master')).content('aFile'),
-    'content'
-  );
+  const c = await (await provider.branch('repo1#master')).content('aFile');
+
+  t.is(c.content, 'content');
 });

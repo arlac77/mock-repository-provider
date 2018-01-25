@@ -1,15 +1,15 @@
-import { Provider, Repository, Branch } from 'repository-provider';
+import { Provider, Repository, Branch, Content } from 'repository-provider';
 
 export class MockBranch extends Branch {
   async content(path, options = {}) {
     if (this.files[path] === undefined) {
       if (options.ignoreMissing) {
-        return '';
+        return Content(path, '');
       }
       return undefined;
     }
 
-    return this.files[path];
+    return new Content(path, this.files[path]);
   }
 
   get files() {
