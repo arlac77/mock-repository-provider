@@ -4,7 +4,7 @@ export class MockBranch extends Branch {
   async content(path, options = {}) {
     if (this.files[path] === undefined) {
       if (options.ignoreMissing) {
-        return Content(path, '');
+        return new Content(path, '');
       }
       return undefined;
     }
