@@ -1,6 +1,9 @@
 {
   "name": "mock-repository-provider",
   "version": "0.0.0-semantic-release",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/mock-repository-provider.js",
   "module": "src/mock-repository-provider.js",
   "description": "mocking repository provider",
