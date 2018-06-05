@@ -26,13 +26,14 @@ mocking repository provider
 ### Table of Contents
 
 -   [MockProvider](#mockprovider)
+    -   [Parameters](#parameters)
     -   [url](#url)
 
 ## MockProvider
 
 **Extends Provider**
 
-**Parameters**
+### Parameters
 
 -   `files` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
