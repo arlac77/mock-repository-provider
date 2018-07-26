@@ -40,6 +40,11 @@ export class MockRepository extends Repository {
   get issuesURL() {
     return `${this.url}/issues`;
   }
+
+  get owner() {
+    const parts = this.name.split(/\//);
+    return parts.length > 1 ? parts[0] : undefined;
+  }
 }
 
 /**
