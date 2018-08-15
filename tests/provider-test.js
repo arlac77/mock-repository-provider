@@ -34,7 +34,7 @@ test('provider repository with owner', async t => {
 
   const r = await provider.repository('owner1/repo1');
   t.is(r.name, 'owner1/repo1');
-  t.is(r.owner, provider);
+  t.is(r.owner, await provider.repositoryGroup('owner1'));
 });
 
 test('provider branch', async t => {

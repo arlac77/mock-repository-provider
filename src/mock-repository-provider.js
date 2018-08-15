@@ -1,4 +1,10 @@
-import { Provider, Repository, Branch, Content } from 'repository-provider';
+import {
+  Provider,
+  Repository,
+  RepositoryGroup,
+  Branch,
+  Content
+} from 'repository-provider';
 
 export class MockBranch extends Branch {
   async content(path, options = {}) {
@@ -59,9 +65,18 @@ export class MockProvider extends Provider {
   }
 
   async initialize() {
-    return Promise.all(
-      Object.keys(this.files).map(repoName => this.createRepository(repoName))
-    );
+    for (const name of Object.keys(this.files)) {
+      let owner = this;
+
+      const m = name.match(/^(\w+)\/(\w+)$/);
+
+      if (m) {
+        const groupName = m[1];
+        owner = await this.createRepositoryGroup(groupName);
+      }
+
+      await owner.createRepository(name);
+    }
   }
 
   /**
