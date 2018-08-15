@@ -20,7 +20,7 @@ test('provider repository', async t => {
 
   const r = await provider.repository('repo1');
   t.is(r.name, 'repo1');
-  t.is(r.owner, undefined);
+  t.is(r.owner, provider);
   t.is(r.url, 'http://mock-provider.com/repo1');
   t.is(r.homePageURL, 'http://mock-provider.com/repo1#readme');
   t.is(r.issuesURL, 'http://mock-provider.com/repo1/issues');
@@ -33,8 +33,8 @@ test('provider repository with owner', async t => {
   t.is(provider.url, 'http://mock-provider.com');
 
   const r = await provider.repository('owner1/repo1');
-  //t.is(r.name, 'repo1');
-  t.is(r.owner, 'owner1');
+  t.is(r.name, 'owner1/repo1');
+  t.is(r.owner, provider);
 });
 
 test('provider branch', async t => {
