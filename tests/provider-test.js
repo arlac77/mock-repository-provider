@@ -7,12 +7,18 @@ const files = {
       aFile: 'content'
     }
   },
-  ['owner1/repo1']: {
+  ['owner1/repo2']: {
     master: {
       aFile: 'content'
     }
   }
 };
+
+test('provider repositoryGroups', async t => {
+  const provider = new MockProvider(files);
+  const g1 = await provider.repositoryGroup('owner1');
+  t.is(g1.name, 'owner1');
+});
 
 test('provider repository', async t => {
   const provider = new MockProvider(files);
@@ -32,8 +38,17 @@ test('provider repository with owner', async t => {
   const provider = new MockProvider(files);
   t.is(provider.url, 'http://mock-provider.com');
 
-  const r = await provider.repository('owner1/repo1');
-  t.is(r.name, 'owner1/repo1');
+  const r = await provider.repository('owner1/repo2');
+  t.is(r.name, 'owner1/repo2');
+  t.is(r.provider, provider);
+  t.is(r.owner, await provider.repositoryGroup('owner1'));
+});
+
+test('provider repository with owner and branch', async t => {
+  const provider = new MockProvider(files);
+  const r = await provider.repository('owner1/repo2#master');
+  t.is(r.name, 'owner1/repo2');
+  t.is(r.provider, provider);
   t.is(r.owner, await provider.repositoryGroup('owner1'));
 });
 
@@ -42,7 +57,20 @@ test('provider branch', async t => {
 
   const b = await provider.branch('repo1#master');
   t.is(b.name, 'master');
+  t.is(b.provider, provider);
+  t.is(b.owner, provider);
   t.is(b.url, 'http://mock-provider.com/repo1');
+});
+
+test('provider branch with owner', async t => {
+  const provider = new MockProvider(files);
+
+  const b = await provider.branch('owner1/repo2#master');
+
+  t.is(b.name, 'master');
+  t.is(b.provider, provider);
+  t.is(b.owner, await provider.repositoryGroup('owner1'));
+  t.is(b.url, 'http://mock-provider.com/owner1/repo2');
 });
 
 test('repository content', async t => {
