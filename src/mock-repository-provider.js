@@ -22,8 +22,8 @@ export class MockRepository extends Repository {
     return this.provider.files[this.name];
   }
 
-  async initialize() {
-    await super.initialize();
+  async _initialize() {
+    await super._initialize();
 
     for (const name of Object.keys(this.files)) {
       await this.createBranch(name);
@@ -54,7 +54,7 @@ export class MockProvider extends Provider {
     });
   }
 
-  async initialize() {
+  async _initialize() {
     for (const name of Object.keys(this.files)) {
       let owner = this;
 
