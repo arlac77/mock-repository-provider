@@ -1,12 +1,9 @@
-import { Provider, Repository, Branch, Content } from 'repository-provider';
+import { Provider, Repository, Branch, Content } from "repository-provider";
 
 export class MockBranch extends Branch {
-  async content(path, options = {}) {
+  async content(path) {
     if (this.files[path] === undefined) {
-      if (options.ignoreMissing) {
-        return new Content(path, '');
-      }
-      return undefined;
+      throw new Error(`No such object '${path}'`);
     }
 
     return new Content(path, this.files[path]);
@@ -49,7 +46,7 @@ export class MockRepository extends Repository {
 export class MockProvider extends Provider {
   constructor(files) {
     super();
-    Object.defineProperty(this, 'files', {
+    Object.defineProperty(this, "files", {
       value: files
     });
   }
@@ -72,7 +69,7 @@ export class MockProvider extends Provider {
    * @return {string} 'http://mock-provider.com'
    */
   get url() {
-    return 'http://mock-provider.com';
+    return "http://mock-provider.com";
   }
 
   get branchClass() {
