@@ -79,6 +79,9 @@ test('repository content', async t => {
   const c = await (await provider.repository('repo1')).content('aFile');
 
   t.is(c.content, 'content');
+  t.is(c.toString(), 'content');
+  t.true(c.isFile);
+  t.is(c.path, 'aFile');
 });
 
 test('branch content', async t => {
@@ -87,4 +90,5 @@ test('branch content', async t => {
   const c = await (await provider.branch('repo1#master')).content('aFile');
 
   t.is(c.content, 'content');
+  t.is(c.toString(), 'content');
 });
