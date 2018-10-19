@@ -52,6 +52,7 @@ export class MockProvider extends Provider {
   }
 
   async _initialize() {
+    await super._initialize();
     for (const name of Object.keys(this.files)) {
       let owner = this;
 
