@@ -81,7 +81,7 @@ test('repository content', async t => {
   t.is(c.content, 'content');
   t.is(c.toString(), 'content');
   t.true(c.isFile);
-  t.is(c.path, 'aFile');
+  t.is(c.name, 'aFile');
 });
 
 test('branch content', async t => {
