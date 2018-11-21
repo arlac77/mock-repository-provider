@@ -84,10 +84,10 @@ test('repository content', async t => {
   t.is(c.name, 'aFile');
 });
 
-test('branch content', async t => {
+test('branch entry', async t => {
   const provider = new MockProvider(files);
 
-  const c = await (await provider.branch('repo1#master')).content('aFile');
+  const c = await (await provider.branch('repo1#master')).entry('aFile');
 
   t.is(c.content, 'content');
   t.is(c.toString(), 'content');

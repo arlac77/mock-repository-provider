@@ -1,12 +1,18 @@
 import { Provider, Repository, Branch, Content } from "repository-provider";
 
 export class MockBranch extends Branch {
-  async content(name) {
+  async entry(name) {
     if (this.files[name] === undefined) {
       throw new Error(`No such object '${name}'`);
     }
 
     return new Content(name, this.files[name]);
+  }
+
+  async * entries(filter) {
+    for(const name of this.files) {
+      yield new Content(name, this.files[name]);
+    }
   }
 
   get files() {
