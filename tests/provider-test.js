@@ -78,8 +78,7 @@ test('repository entry', async t => {
 
   const c = await (await provider.repository('repo1')).entry('aFile');
 
-  t.is(c.content, 'content');
-  t.is(c.toString(), 'content');
+  t.is(await c.getString(), 'content');
   t.true(c.isFile);
   t.is(c.name, 'aFile');
 });
@@ -89,6 +88,5 @@ test('branch entry', async t => {
 
   const c = await (await provider.branch('repo1#master')).entry('aFile');
 
-  t.is(c.content, 'content');
-  t.is(c.toString(), 'content');
+  t.is(await c.getString(), 'content');
 });
