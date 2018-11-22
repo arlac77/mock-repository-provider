@@ -73,10 +73,10 @@ test('provider branch with owner', async t => {
   t.is(b.url, 'http://mock-provider.com/owner1/repo2');
 });
 
-test('repository content', async t => {
+test('repository entry', async t => {
   const provider = new MockProvider(files);
 
-  const c = await (await provider.repository('repo1')).content('aFile');
+  const c = await (await provider.repository('repo1')).entry('aFile');
 
   t.is(c.content, 'content');
   t.is(c.toString(), 'content');
