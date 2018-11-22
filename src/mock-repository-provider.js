@@ -1,4 +1,4 @@
-import { Provider, Repository, Branch, Entry } from "repository-provider";
+import { Provider, Repository, Branch } from "repository-provider";
 
 export class MockBranch extends Branch {
   async entry(name) {
@@ -6,12 +6,12 @@ export class MockBranch extends Branch {
       throw new Error(`No such object '${name}'`);
     }
 
-    return new Entry(name, this.files[name]);
+    return new this.entryClass(name, this.files[name]);
   }
 
-  async * entries(filter) {
-    for(const name of this.files) {
-      yield new Entry(name, this.files[name]);
+  async *entries(filter) {
+    for (const name of this.files) {
+      yield new this.entryClass(name, this.files[name]);
     }
   }
 
