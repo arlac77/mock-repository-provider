@@ -1,4 +1,5 @@
 import { Provider, Repository, Branch } from "repository-provider";
+import { StringContentEntry } from "content-entry";
 
 export class MockBranch extends Branch {
   async entry(name) {
@@ -17,6 +18,10 @@ export class MockBranch extends Branch {
 
   get files() {
     return this.repository.files[this.name];
+  }
+
+  get entryClass() {
+    return StringContentEntry;
   }
 }
 
