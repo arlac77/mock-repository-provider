@@ -13,5 +13,5 @@ export default {
     interop: false
   },
   plugins: [resolve(), commonjs(), cleanup()],
-  external: ["repository-provider", "fs", "stream", "path"]
+  external: ["fs", "stream", "path"]
 };
