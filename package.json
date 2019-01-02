@@ -4,8 +4,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/mock-repository-provider.js",
-  "module": "src/mock-repository-provider.js",
+  "main": "src/mock-repository-provider.mjs",
+  "module": "src/mock-repository-provider.mjs",
   "description": "mocking repository provider",
   "keywords": [
     "git",
@@ -20,9 +20,9 @@
   "license": "BSD-2-Clause",
   "scripts": {
     "cover": "c8 --temp-directory build/coverage ava && c8 report -r lcov --temp-directory build/coverage",
-    "docs": "documentation readme src/mock-repository-provider.js --section=API",
-    "lint": "documentation lint src/mock-repository-provider.js",
-    "posttest": "markdown-doctest && npm run prepare",
+    "docs": "documentation readme src/mock-repository-provider.mjs --section=API",
+    "lint": "documentation lint src/mock-repository-provider.mjs",
+    "posttest": "markdown-doctest",
     "test": "ava"
   },
   "dependencies": {
