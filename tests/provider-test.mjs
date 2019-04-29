@@ -14,10 +14,20 @@ const files = {
   }
 };
 
-test("provider repositoryGroups", async t => {
+test("provider repositoryGroup", async t => {
   const provider = new MockProvider(files);
   const g1 = await provider.repositoryGroup("owner1");
   t.is(g1.name, "owner1");
+});
+
+test("provider repositoryGroups", async t => {
+  const provider = new MockProvider(files);
+  const grps = {};
+  for await (const g of provider.repositoryGroups("*")) {
+    grps[g.name] = g;
+  }
+
+  t.is(grps.owner1.name, "owner1");
 });
 
 test("provider repository", async t => {
@@ -32,6 +42,17 @@ test("provider repository", async t => {
   t.is(r.issuesURL, "http://mock-provider.com/repo1/issues");
   const b = await r.branch("master");
   t.is(b.name, "master");
+});
+
+test("provider repositories", async t => {
+  const provider = new MockProvider(files);
+
+  const rps = {};
+  for await (const r of provider.repositories("*")) {
+    rps[r.name] = r;
+  }
+
+  t.is(rps.repo1.name, "repo1");
 });
 
 test("provider repository with owner", async t => {
