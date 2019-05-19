@@ -44,11 +44,11 @@ test("provider repository", async t => {
   t.is(b.name, "master");
 });
 
-test("provider repositories", async t => {
+test.skip("provider repositories", async t => {
   const provider = new MockProvider(files);
 
   const rps = {};
-  for await (const r of provider.repositories("*")) {
+  for await (const r of provider.repositories("*/*")) {
     rps[r.name] = r;
   }
 

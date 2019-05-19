@@ -9,7 +9,6 @@
   "module": "src/mock-repository-provider.mjs",
   "description": "mocking repository provider",
   "keywords": [
-    "git",
     "repository-provider"
   ],
   "contributors": [
@@ -28,6 +27,7 @@
   },
   "dependencies": {
     "content-entry": "^2.1.2",
+    "globby": "^9.2.0",
     "repository-provider": "^12.7.0"
   },
   "devDependencies": {

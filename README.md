@@ -33,6 +33,7 @@ mocking repository provider
 ### Parameters
 
 -   `files` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `options`  
 
 ### url
 

@@ -1,5 +1,6 @@
+import globby from "globby";
 import { Provider, Repository, Branch } from "repository-provider";
-import { StringContentEntry } from "content-entry";
+import { StringContentEntry, FileSystemEntry } from "content-entry";
 
 export class MockBranch extends Branch {
   async entry(name) {
@@ -51,12 +52,65 @@ export class MockRepository extends Repository {
   }
 }
 
+export class MockFileSystemBranch extends Branch {
+  async entry(name) {
+    if (this.files[name] === undefined) {
+      throw new Error(`No such object '${name}'`);
+    }
+
+    return new this.entryClass(name, this.files[name]);
+  }
+
+  async entry(name) {
+    const entry = new FileSystemEntry(name, this.files);
+    if (await entry.getExists()) {
+      return entry;
+    }
+    throw new Error(`file not found: ${name}`);
+  }
+
+  async *entries(matchingPatterns = ["**/.*", "**/*"]) {
+    for (const name of await globby(matchingPatterns, {
+      cwd: this.files
+    })) {
+      yield new this.entryClass(name, this.files);
+    }
+  }
+
+  get files() {
+    return this.provider.files;
+  }
+
+  get entryClass() {
+    return FileSystemEntry;
+  }
+}
+
+export class MockFileSystemRepository extends Repository {
+  async _initialize() {
+    await super._initialize();
+
+    const branch = await this.createBranch(this.defaultBranchName);
+  }
+
+  get url() {
+    return `${this.provider.url}/${this.name}`;
+  }
+}
+
 /**
  * @param {Object} files
  */
 export class MockProvider extends Provider {
-  constructor(files) {
-    super();
+  static get defaultOptions() {
+    return {
+      repositoryName: "owner1/repo1",
+      ...super.defaultOptions
+    };
+  }
+
+  constructor(files, options) {
+    super(options);
     Object.defineProperty(this, "files", {
       value: files
     });
@@ -64,7 +118,8 @@ export class MockProvider extends Provider {
 
   async _initialize() {
     await super._initialize();
-    for (const name of Object.keys(this.files)) {
+
+    const setupRepo = async name => {
       let owner = this;
 
       const [groupName, repoName] = name.split(/\//);
@@ -73,7 +128,15 @@ export class MockProvider extends Provider {
         owner = await this.createRepositoryGroup(groupName);
       }
 
-      const r = await owner.createRepository(name);
+      await owner.createRepository(name);
+    };
+
+    if (typeof this.files === "string") {
+      await setupRepo(this.repositoryName);
+    } else {
+      for (const name of Object.keys(this.files)) {
+        await setupRepo(name);
+      }
     }
   }
 
@@ -85,10 +148,12 @@ export class MockProvider extends Provider {
   }
 
   get branchClass() {
-    return MockBranch;
+    return typeof this.files === "string" ? MockFileSystemBranch : MockBranch;
   }
 
   get repositoryClass() {
-    return MockRepository;
+    return typeof this.files === "string"
+      ? MockFileSystemRepository
+      : MockRepository;
   }
 }
