@@ -3,6 +3,15 @@ import { Provider, Repository, Branch } from "repository-provider";
 import { StringContentEntry, FileSystemEntry } from "content-entry";
 
 export class MockBranch extends Branch {
+
+  async maybeEntry(name) {
+    if (this.files[name] === undefined) {
+      return undefined;
+    }
+
+    return new this.entryClass(name, this.files[name]);
+  }
+
   async entry(name) {
     if (this.files[name] === undefined) {
       throw new Error(`No such object '${name}'`);
@@ -59,6 +68,14 @@ export class MockFileSystemBranch extends Branch {
     }
 
     return new this.entryClass(name, this.files[name]);
+  }
+
+  async maybeEntry(name) {
+    const entry = new FileSystemEntry(name, this.files);
+    if (await entry.getExists()) {
+      return entry;
+    }
+    return undefined;
   }
 
   async entry(name) {

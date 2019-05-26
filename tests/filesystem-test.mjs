@@ -14,7 +14,7 @@ test("fs repositoryGroup", async t => {
   t.is(g1.name, "owner2");
 });
 
-test.skip("fs branch", async t => {
+test.serial("fs branch", async t => {
   const b = await provider.branch("owner2/repository2#master");
   t.is(b.name, "master");
   t.is(b.provider, provider);
@@ -24,6 +24,15 @@ test.skip("fs branch", async t => {
 test("fs entry", async t => {
   const b = await provider.branch("owner2/repository2#master");
   const c = await b.entry("package.json");
+
+  t.true((await c.getString()).startsWith("{"));
+  t.true(c.isBlob);
+  t.is(c.name, "package.json");
+});
+
+test.serial("fs maybeEntry", async t => {
+  const b = await provider.branch("owner2/repository2#master");
+  const c = await b.maybeEntry("package.json");
 
   t.true((await c.getString()).startsWith("{"));
   t.true(c.isBlob);
