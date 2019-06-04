@@ -64,7 +64,7 @@ export class MockRepository extends Repository {
 export class MockFileSystemBranch extends Branch {
   async entry(name) {
     if (this.files[name] === undefined) {
-      throw new Error(`No such object '${name}'`);
+      throw new Error(`No such entry '${name}'`);
     }
 
     return new this.entryClass(name, this.files[name]);
@@ -83,7 +83,7 @@ export class MockFileSystemBranch extends Branch {
     if (await entry.getExists()) {
       return entry;
     }
-    throw new Error(`file not found: ${name}`);
+    throw new Error(`Entry not found: ${name}`);
   }
 
   async *entries(matchingPatterns = ["**/.*", "**/*"]) {
@@ -143,8 +143,10 @@ export class MockProvider extends Provider {
 
       if (repoName) {
         owner = await this.createRepositoryGroup(groupName);
+      //  name = repoName;
       }
 
+      console.log("CREATE", owner.name, name);
       await owner.createRepository(name);
     };
 
