@@ -146,7 +146,6 @@ export class MockProvider extends Provider {
       //  name = repoName;
       }
 
-      console.log("CREATE", owner.name, name);
       await owner.createRepository(name);
     };
 
