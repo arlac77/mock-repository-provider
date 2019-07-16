@@ -3,7 +3,6 @@ import { Provider, Repository, Branch } from "repository-provider";
 import { StringContentEntry, FileSystemEntry } from "content-entry";
 
 export class MockBranch extends Branch {
-
   async maybeEntry(name) {
     if (this.files[name] === undefined) {
       return undefined;
@@ -37,7 +36,7 @@ export class MockBranch extends Branch {
 
 export class MockRepository extends Repository {
   get files() {
-    return this.provider.files[this.name];
+    return this.provider.files[this.fullName];
   }
 
   async _initialize() {
@@ -49,7 +48,7 @@ export class MockRepository extends Repository {
   }
 
   get url() {
-    return `${this.provider.url}/${this.name}`;
+    return `${this.provider.url}/${this.fullName}`;
   }
 
   get homePageURL() {
@@ -111,7 +110,7 @@ export class MockFileSystemRepository extends Repository {
   }
 
   get url() {
-    return `${this.provider.url}/${this.name}`;
+    return `${this.provider.url}/${this.fullName}`;
   }
 }
 
@@ -139,14 +138,17 @@ export class MockProvider extends Provider {
     const setupRepo = async name => {
       let owner = this;
 
-      const [groupName, repoName] = name.split(/\//);
+      let [groupName, repoName] = name.split(/\//);
 
       if (repoName) {
         owner = await this.createRepositoryGroup(groupName);
-      //  name = repoName;
+      } else {
+        repoName = name;
       }
 
-      await owner.createRepository(name);
+      const r = await owner.createRepository(repoName);
+
+      //console.log("REPO", name, r.name);
     };
 
     if (typeof this.files === "string") {
@@ -163,6 +165,10 @@ export class MockProvider extends Provider {
    */
   get url() {
     return "http://mock-provider.com";
+  }
+
+  get repositoryBases() {
+    return [this.url];
   }
 
   get branchClass() {

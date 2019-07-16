@@ -44,15 +44,15 @@ test("provider repository", async t => {
   t.is(b.name, "master");
 });
 
-test.skip("provider repositories", async t => {
+test("provider repositories", async t => {
   const provider = new MockProvider(files);
 
   const rps = {};
   for await (const r of provider.repositories("*/*")) {
-    rps[r.name] = r;
+    rps[r.fullName] = r;
   }
 
-  t.is(rps.repo1.name, "repo1");
+  t.is(rps['owner1/repo2'].name, "repo2");
 });
 
 test("provider repository with owner", async t => {
@@ -60,7 +60,7 @@ test("provider repository with owner", async t => {
   t.is(provider.url, "http://mock-provider.com");
 
   const r = await provider.repository("owner1/repo2");
-  t.is(r.name, "owner1/repo2");
+  t.is(r.fullName, "owner1/repo2");
   t.is(r.provider, provider);
   t.is(r.owner, await provider.repositoryGroup("owner1"));
 });
@@ -68,7 +68,7 @@ test("provider repository with owner", async t => {
 test("provider repository with owner and branch", async t => {
   const provider = new MockProvider(files);
   const r = await provider.repository("owner1/repo2#master");
-  t.is(r.name, "owner1/repo2");
+  t.is(r.fullName, "owner1/repo2");
   t.is(r.provider, provider);
   t.is(r.owner, await provider.repositoryGroup("owner1"));
 });
