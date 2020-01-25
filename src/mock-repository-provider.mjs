@@ -20,8 +20,8 @@ export class MockBranch extends Branch {
   }
 
   async *entries(filter) {
-    for (const name of this.files) {
-      yield new this.entryClass(name, this.files[name]);
+    for (const [name, entry] of Object.entries(this.files)) {
+      yield new this.entryClass(name, entry);
     }
   }
 
