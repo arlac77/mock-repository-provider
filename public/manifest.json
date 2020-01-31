@@ -1,0 +1,10 @@
+{
+  "name": "mock-repository-provider",
+  "description": "mocking repository provider",
+  "icons": [
+    {
+      "src": "facicon.ico",
+      "sizes": "16x16"
+    }
+  ]
+}
