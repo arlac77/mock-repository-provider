@@ -47,7 +47,6 @@
     "url": "https://github.com/arlac77/mock-repository-provider/issues"
   },
   "homepage": "https://github.com/arlac77/mock-repository-provider#readme",
-  "release": {},
   "template": {
     "inheritFrom": "arlac77/template-esm-only"
   }
