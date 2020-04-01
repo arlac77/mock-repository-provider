@@ -1,4 +1,6 @@
 import globby from "globby";
+import micromatch from "micromatch";
+
 import { Provider, Repository, Branch } from "repository-provider";
 import { StringContentEntry, FileSystemEntry } from "content-entry";
 
@@ -19,9 +21,9 @@ export class MockBranch extends Branch {
     return new this.entryClass(name, this.files[name]);
   }
 
-  async *entries(filter) {
-    for (const [name, entry] of Object.entries(this.files)) {
-      yield new this.entryClass(name, entry);
+  async *entries(patterns) {
+    for (const name of micromatch(Object.keys(this.files), patterns)) {
+      yield new this.entryClass(name, this.files[name]);
     }
   }
 
