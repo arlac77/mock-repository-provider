@@ -21,7 +21,7 @@ export class MockBranch extends Branch {
     return new this.entryClass(name, this.files[name]);
   }
 
-  async *entries(patterns) {
+  async *entries(patterns = "**/*") {
     for (const name of micromatch(Object.keys(this.files), patterns)) {
       yield new this.entryClass(name, this.files[name]);
     }
