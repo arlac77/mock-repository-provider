@@ -1,5 +1,6 @@
 import globby from "globby";
 import micromatch from "micromatch";
+import { replaceWithOneTimeExecutionMethod } from "one-time-execution-method";
 
 import { Provider, Repository, Branch } from "repository-provider";
 import { StringContentEntry, FileSystemEntry } from "content-entry";
@@ -41,14 +42,6 @@ export class MockRepository extends Repository {
     return this.provider.files[this.fullName];
   }
 
-  async _initialize() {
-    await super._initialize();
-
-    for (const name of Object.keys(this.files)) {
-      await this.createBranch(name);
-    }
-  }
-
   get url() {
     return `${this.provider.url}/${this.fullName}`;
   }
@@ -60,7 +53,18 @@ export class MockRepository extends Repository {
   get issuesURL() {
     return `${this.url}/issues`;
   }
+
+  async initializeBranches() {
+    for (const name of Object.keys(this.files)) {
+      await this._createBranch(name);
+    }
+  }
 }
+
+replaceWithOneTimeExecutionMethod(
+  MockRepository.prototype,
+  "initializeBranches"
+);
 
 export class MockFileSystemBranch extends Branch {
   async entry(name) {
@@ -105,16 +109,19 @@ export class MockFileSystemBranch extends Branch {
 }
 
 export class MockFileSystemRepository extends Repository {
-  async _initialize() {
-    await super._initialize();
-
-    const branch = await this.createBranch(this.defaultBranchName);
-  }
-
   get url() {
     return `${this.provider.url}/${this.fullName}`;
   }
+
+  async initializeBranches() {
+    return this._createBranch(this.defaultBranchName);
+  }
 }
+
+replaceWithOneTimeExecutionMethod(
+  MockFileSystemRepository.prototype,
+  "initializeBranches"
+);
 
 /**
  * @param {Object} files
@@ -132,34 +139,6 @@ export class MockProvider extends Provider {
     Object.defineProperty(this, "files", {
       value: files
     });
-  }
-
-  async _initialize() {
-    await super._initialize();
-
-    const setupRepo = async name => {
-      let owner = this;
-
-      let [groupName, repoName] = name.split(/\//);
-
-      if (repoName) {
-        owner = await this.createRepositoryGroup(groupName);
-      } else {
-        repoName = name;
-      }
-
-      const r = await owner.createRepository(repoName);
-
-      //console.log("REPO", name, r.name);
-    };
-
-    if (typeof this.files === "string") {
-      await setupRepo(this.repositoryName);
-    } else {
-      for (const name of Object.keys(this.files)) {
-        await setupRepo(name);
-      }
-    }
   }
 
   /**
@@ -182,4 +161,32 @@ export class MockProvider extends Provider {
       ? MockFileSystemRepository
       : MockRepository;
   }
+
+  async initializeRepositories() {
+    const setupRepo = async name => {
+      let owner = this;
+
+      let [groupName, repoName] = name.split(/\//);
+
+      if (repoName) {
+        owner = await this._createRepositoryGroup(groupName);
+      } else {
+        repoName = name;
+      }
+      await owner._createRepository(repoName);
+    };
+
+    if (typeof this.files === "string") {
+      await setupRepo(this.repositoryName);
+    } else {
+      for (const name of Object.keys(this.files)) {
+        await setupRepo(name);
+      }
+    }
+  }
 }
+
+replaceWithOneTimeExecutionMethod(
+  MockProvider.prototype,
+  "initializeRepositories"
+);
