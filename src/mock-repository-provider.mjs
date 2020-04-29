@@ -169,11 +169,11 @@ export class MockProvider extends Provider {
       let [groupName, repoName] = name.split(/\//);
 
       if (repoName) {
-        owner = await this._createRepositoryGroup(groupName);
+        owner = await this.addRepositoryGroup(groupName);
       } else {
         repoName = name;
       }
-      await owner._createRepository(repoName);
+      await owner.addRepository(repoName);
     };
 
     if (typeof this.files === "string") {
