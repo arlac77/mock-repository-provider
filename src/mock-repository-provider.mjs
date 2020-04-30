@@ -56,7 +56,7 @@ export class MockRepository extends Repository {
 
   async initializeBranches() {
     for (const name of Object.keys(this.files)) {
-      await this._createBranch(name);
+      this.addBranch(name);
     }
   }
 }
@@ -114,7 +114,7 @@ export class MockFileSystemRepository extends Repository {
   }
 
   async initializeBranches() {
-    return this._createBranch(this.defaultBranchName);
+    return this.addBranch(this.defaultBranchName);
   }
 }
 

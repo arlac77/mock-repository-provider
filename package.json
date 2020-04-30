@@ -9,7 +9,8 @@
   "main": "src/mock-repository-provider.mjs",
   "description": "mocking repository provider",
   "keywords": [
-    "repository-provider"
+    "repository-provider",
+    "mock"
   ],
   "contributors": [
     {
@@ -25,11 +26,11 @@
     "lint": "documentation lint src/mock-repository-provider.mjs"
   },
   "dependencies": {
-    "content-entry": "^2.3.3",
+    "content-entry": "^2.3.4",
     "globby": "^11.0.0",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^2.0.1",
-    "repository-provider": "^16.17.6"
+    "repository-provider": "^17.0.0"
   },
   "devDependencies": {
     "ava": "^3.8.1",
