@@ -6,7 +6,7 @@
   },
   "sideEffects": false,
   "type": "module",
-  "main": "src/mock-repository-provider.mjs",
+  "main": "./src/mock-repository-provider.mjs",
   "exports": {
     ".": "./src/mock-repository-provider.mjs",
     "./": "./"
