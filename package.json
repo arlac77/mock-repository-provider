@@ -8,8 +8,7 @@
   "type": "module",
   "main": "./src/mock-repository-provider.mjs",
   "exports": {
-    ".": "./src/mock-repository-provider.mjs",
-    "./": "./"
+    ".": "./src/mock-repository-provider.mjs"
   },
   "description": "mocking repository provider",
   "keywords": [
@@ -34,7 +33,7 @@
     "globby": "^11.0.0",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^2.0.1",
-    "repository-provider": "^18.3.0"
+    "repository-provider": "^18.5.0"
   },
   "devDependencies": {
     "ava": "^3.8.2",
