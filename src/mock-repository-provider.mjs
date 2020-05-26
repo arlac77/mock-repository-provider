@@ -3,7 +3,8 @@ import micromatch from "micromatch";
 import { replaceWithOneTimeExecutionMethod } from "one-time-execution-method";
 
 import { Provider, Repository, Branch } from "repository-provider";
-import { StringContentEntry, FileSystemEntry } from "content-entry";
+import { StringContentEntry } from "content-entry";
+import { FileSystemEntry } from "content-entry-filesystem";
 
 export class MockBranch extends Branch {
   async maybeEntry(name) {
