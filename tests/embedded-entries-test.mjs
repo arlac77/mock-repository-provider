@@ -36,7 +36,7 @@ test("provider repository", async t => {
 
   const r = await provider.repository("repo1");
   t.is(r.name, "repo1");
-  t.is(r.owner, provider);
+  t.is(r.provider, provider);
   t.is(r.url, "http://mock-provider.com/repo1");
   t.is(r.homePageURL, "http://mock-provider.com/repo1#readme");
   t.is(r.issuesURL, "http://mock-provider.com/repo1/issues");
@@ -79,7 +79,6 @@ test("provider branch", async t => {
   const b = await provider.branch("repo1#master");
   t.is(b.name, "master");
   t.is(b.provider, provider);
-  t.is(b.owner, provider);
   t.is(b.url, "http://mock-provider.com/repo1");
 });
 

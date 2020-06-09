@@ -2,7 +2,7 @@ import globby from "globby";
 import micromatch from "micromatch";
 import { replaceWithOneTimeExecutionMethod } from "one-time-execution-method";
 
-import { Provider, Repository, Branch } from "repository-provider";
+import { MultiGroupProvider, Repository, Branch } from "repository-provider";
 import { StringContentEntry } from "content-entry";
 import { FileSystemEntry } from "content-entry-filesystem";
 
@@ -127,7 +127,7 @@ replaceWithOneTimeExecutionMethod(
 /**
  * @param {Object} files
  */
-export class MockProvider extends Provider {
+export class MockProvider extends MultiGroupProvider {
   static get defaultOptions() {
     return {
       repositoryName: "owner1/repo1",
@@ -164,24 +164,23 @@ export class MockProvider extends Provider {
   }
 
   async initializeRepositories() {
-    const setupRepo = async name => {
-      let owner = this;
-
+    const setupRepo = name => {
       let [groupName, repoName] = name.split(/\//);
 
-      if (repoName) {
-        owner = await this.addRepositoryGroup(groupName);
-      } else {
+      if (!repoName) {
         repoName = name;
-      }
-      await owner.addRepository(repoName);
+        groupName = "";
+      } 
+      
+      const group = this.addRepositoryGroup(groupName);
+      group.addRepository(repoName);
     };
 
     if (typeof this.files === "string") {
-      await setupRepo(this.repositoryName);
+       setupRepo(this.repositoryName);
     } else {
       for (const name of Object.keys(this.files)) {
-        await setupRepo(name);
+         setupRepo(name);
       }
     }
   }
