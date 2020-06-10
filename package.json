@@ -12,8 +12,8 @@
   },
   "description": "mocking repository provider",
   "keywords": [
-    "repository-provider",
-    "mock"
+    "mock",
+    "repository-provider"
   ],
   "contributors": [
     {
