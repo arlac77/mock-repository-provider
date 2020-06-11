@@ -26,7 +26,7 @@ mocking repository provider
 
 ## MockProvider
 
-**Extends Provider**
+**Extends MultiGroupProvider**
 
 ### Parameters
 
