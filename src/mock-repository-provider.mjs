@@ -128,10 +128,10 @@ replaceWithOneTimeExecutionMethod(
  * @param {Object} files
  */
 export class MockProvider extends MultiGroupProvider {
-  static get defaultOptions() {
+  static get attributes() {
     return {
-      repositoryName: "owner1/repo1",
-      ...super.defaultOptions
+      ...super.attributes,
+      repositoryName: "owner1/repo1"
     };
   }
 
