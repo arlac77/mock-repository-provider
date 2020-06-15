@@ -124,6 +124,8 @@ replaceWithOneTimeExecutionMethod(
   "initializeBranches"
 );
 
+const DEFAULT_GROUP_NAME = "";
+
 /**
  * @param {Object} files
  */
@@ -131,7 +133,7 @@ export class MockProvider extends MultiGroupProvider {
   static get attributes() {
     return {
       ...super.attributes,
-      repositoryName: "owner1/repo1"
+      repositoryName: { default: "owner1/repo1" }
     };
   }
 
@@ -140,6 +142,10 @@ export class MockProvider extends MultiGroupProvider {
     Object.defineProperty(this, "files", {
       value: files
     });
+  }
+
+  supportsBase(base) {
+    return true;
   }
 
   /**
@@ -169,20 +175,44 @@ export class MockProvider extends MultiGroupProvider {
 
       if (!repoName) {
         repoName = name;
-        groupName = "";
-      } 
-      
+        groupName = DEFAULT_GROUP_NAME;
+      }
+
       const group = this.addRepositoryGroup(groupName);
       group.addRepository(repoName);
     };
 
     if (typeof this.files === "string") {
-       setupRepo(this.repositoryName);
+      setupRepo(this.repositoryName);
     } else {
       for (const name of Object.keys(this.files)) {
-         setupRepo(name);
+        setupRepo(name);
       }
     }
+  }
+
+  async repository(name) {
+    const { group, repository } = this.parseName(name);
+
+    console.log("");
+
+    if (group == undefined) {
+      const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
+      return g.repository(name);
+    }
+
+    return super.repository(name);
+  }
+
+  async branch(name) {
+    const { group, repository, branch } = this.parseName(name);
+
+    if (group == undefined) {
+      const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
+      return g.branch(name);
+    }
+
+    return super.branch(name);
   }
 }
 
