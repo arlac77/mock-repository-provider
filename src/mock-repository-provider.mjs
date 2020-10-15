@@ -155,6 +155,14 @@ export class MockProvider extends MultiGroupProvider {
     return "http://mock-provider.com";
   }
 
+  /**
+   * We are called mock
+   * @return {string} mock
+   */
+  get name() {
+    return "mock";
+  }
+
   get repositoryBases() {
     return [this.url];
   }
