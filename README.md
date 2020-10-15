@@ -23,6 +23,7 @@ mocking repository provider
 -   [MockProvider](#mockprovider)
     -   [Parameters](#parameters)
     -   [url](#url)
+    -   [name](#name)
 
 ## MockProvider
 
@@ -36,6 +37,12 @@ mocking repository provider
 ### url
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** '<http://mock-provider.com>'
+
+### name
+
+We are called mock
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** mock
 
 # install
 
