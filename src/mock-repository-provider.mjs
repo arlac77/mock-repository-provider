@@ -202,8 +202,6 @@ export class MockProvider extends MultiGroupProvider {
   async repository(name) {
     const { group, repository } = this.parseName(name);
 
-    console.log("");
-
     if (group == undefined) {
       const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
       return g.repository(name);
