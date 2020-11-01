@@ -20,6 +20,18 @@ test("provider repositoryGroup", async t => {
   t.is(g1.name, "owner1");
 });
 
+test("provider repositoryGroup delay", async t => {
+  const provider = new MockProvider(files, { delay: 2000 });
+  t.is(provider.delay, 2000);
+
+  const t1 = Date.now();
+
+  const g1 = await provider.repositoryGroup("owner1");
+  t.is(g1.name, "owner1");
+
+  t.true(Date.now() - t1 >= 2000);
+});
+
 test("provider repositoryGroups", async t => {
   const provider = new MockProvider(files);
   const grps = {};
@@ -52,7 +64,7 @@ test("provider repositories", async t => {
     rps[r.fullName] = r;
   }
 
-  t.is(rps['owner1/repo2'].name, "repo2");
+  t.is(rps["owner1/repo2"].name, "repo2");
 });
 
 test("provider repository with owner", async t => {

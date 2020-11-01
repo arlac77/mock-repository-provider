@@ -133,7 +133,10 @@ export class MockProvider extends MultiGroupProvider {
   static get attributes() {
     return {
       ...super.attributes,
-      repositoryName: { default: "owner1/repo1" }
+      repositoryName: { default: "owner1/repo1" },
+      delay: {
+        default: 0
+      }
     };
   }
 
@@ -146,6 +149,10 @@ export class MockProvider extends MultiGroupProvider {
 
   supportsBase(base) {
     return true;
+  }
+
+  async waitDelay(delay = this.delay) {
+    return new Promise(resolve => setTimeout(resolve, delay));
   }
 
   /**
@@ -197,6 +204,8 @@ export class MockProvider extends MultiGroupProvider {
         setupRepo(name);
       }
     }
+
+    await this.waitDelay();
   }
 
   async repository(name) {
