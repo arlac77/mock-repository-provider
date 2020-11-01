@@ -213,7 +213,7 @@ export class MockProvider extends MultiGroupProvider {
 
     if (group == undefined) {
       const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
-      return g.repository(name);
+      return g ? g.repository(name): undefined;
     }
 
     return super.repository(name);
@@ -224,7 +224,7 @@ export class MockProvider extends MultiGroupProvider {
 
     if (group == undefined) {
       const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
-      return g.branch(name);
+      return g ? g.branch(name): undefined;
     }
 
     return super.branch(name);
