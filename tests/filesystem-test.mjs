@@ -1,11 +1,7 @@
 import test from "ava";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 import { MockProvider } from "../src/mock-repository-provider.mjs";
 
-const here = dirname(fileURLToPath(import.meta.url));
-
-const provider = new MockProvider(join(here, ".."), {
+const provider = new MockProvider(new URL("..", import.meta.url).pathname, {
   repositoryName: "owner2/repository2"
 });
 
