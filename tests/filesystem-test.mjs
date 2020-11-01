@@ -1,5 +1,5 @@
 import test from "ava";
-import { MockProvider } from "../src/mock-repository-provider.mjs";
+import MockProvider from "mock-repository-provider";
 
 const provider = new MockProvider(new URL("..", import.meta.url).pathname, {
   repositoryName: "owner2/repository2"

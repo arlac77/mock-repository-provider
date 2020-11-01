@@ -235,3 +235,6 @@ replaceWithOneTimeExecutionMethod(
   MockProvider.prototype,
   "initializeRepositories"
 );
+
+
+export default MockProvider;

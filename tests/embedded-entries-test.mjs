@@ -1,5 +1,5 @@
 import test from "ava";
-import { MockProvider } from "../src/mock-repository-provider.mjs";
+import MockProvider from "mock-repository-provider";
 
 const files = {
   repo1: {
