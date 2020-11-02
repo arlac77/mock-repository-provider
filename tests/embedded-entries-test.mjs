@@ -43,8 +43,10 @@ test("provider repositoryGroups", async t => {
 });
 
 test("provider repository", async t => {
-  const provider = new MockProvider(files, { base: "http://my-provider.com" });
-  t.is(provider.base, "http://my-provider.com");
+  const provider = new MockProvider(files, {
+    repositoryBases: ["http://my-provider.com"]
+  });
+  t.deepEqual(provider.repositoryBases, ["http://my-provider.com"]);
   t.is(provider.url, "http://my-provider.com");
 
   const r = await provider.repository("repo1");

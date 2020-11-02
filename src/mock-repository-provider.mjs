@@ -138,9 +138,8 @@ export class MockProvider extends MultiGroupProvider {
         type: "number",
         default: 0
       },
-      base: {
-        type: "string",
-        default: "http://mock-provider.com"
+      repositoryBases: {
+        default: ["http://mock-provider.com"]
       }
     };
   }
@@ -152,10 +151,6 @@ export class MockProvider extends MultiGroupProvider {
     });
   }
 
-  supportsBase(base) {
-    return base === undefined || base === this.base;
-  }
-
   async waitDelay(delay = this.delay) {
     return new Promise(resolve => setTimeout(resolve, delay));
   }
@@ -164,7 +159,7 @@ export class MockProvider extends MultiGroupProvider {
    * @return {string} 'http://mock-provider.com'
    */
   get url() {
-    return this.base;
+    return this.repositoryBases[0];
   }
 
   /**
