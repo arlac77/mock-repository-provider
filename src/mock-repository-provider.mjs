@@ -1,7 +1,6 @@
 import globby from "globby";
 import micromatch from "micromatch";
 import { replaceWithOneTimeExecutionMethod } from "one-time-execution-method";
-
 import { MultiGroupProvider, Repository, Branch } from "repository-provider";
 import { StringContentEntry } from "content-entry";
 import { FileSystemEntry } from "content-entry-filesystem";

@@ -1,8 +1,11 @@
 import test from "ava";
 import MockProvider from "mock-repository-provider";
 
+const PROVIDER_BASE = "https://my-provider.com";
+
 const provider = new MockProvider(new URL("..", import.meta.url).pathname, {
-  repositoryName: "owner2/repository2"
+  repositoryName: "owner2/repository2",
+  repositoryBases: [PROVIDER_BASE]
 });
 
 test("fs repositoryGroup", async t => {
@@ -10,11 +13,16 @@ test("fs repositoryGroup", async t => {
   t.is(g1.name, "owner2");
 });
 
-test.serial("fs branch", async t => {
+test.skip("fs repositoryGroup with base", async t => {
+  const g1 = await provider.repositoryGroup(PROVIDER_BASE + "/owner2");
+  t.is(g1.name, "owner2");
+});
+
+test("fs branch", async t => {
   const b = await provider.branch("owner2/repository2#master");
   t.is(b.name, "master");
   t.is(b.provider, provider);
-  t.is(b.url, "http://mock-provider.com/owner2/repository2");
+  t.is(b.url, PROVIDER_BASE + "/owner2/repository2");
 });
 
 test("fs entry", async t => {
@@ -26,7 +34,7 @@ test("fs entry", async t => {
   t.is(c.name, "package.json");
 });
 
-test.serial("fs maybeEntry", async t => {
+test("fs maybeEntry", async t => {
   const b = await provider.branch("owner2/repository2#master");
   const c = await b.maybeEntry("package.json");
 
