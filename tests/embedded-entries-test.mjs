@@ -43,15 +43,16 @@ test("provider repositoryGroups", async t => {
 });
 
 test("provider repository", async t => {
-  const provider = new MockProvider(files);
-  t.is(provider.url, "http://mock-provider.com");
+  const provider = new MockProvider(files, { base: "http://my-provider.com" });
+  t.is(provider.base, "http://my-provider.com");
+  t.is(provider.url, "http://my-provider.com");
 
   const r = await provider.repository("repo1");
   t.is(r.name, "repo1");
   t.is(r.provider, provider);
-  t.is(r.url, "http://mock-provider.com/repo1");
-  t.is(r.homePageURL, "http://mock-provider.com/repo1#readme");
-  t.is(r.issuesURL, "http://mock-provider.com/repo1/issues");
+  t.is(r.url, "http://my-provider.com/repo1");
+  t.is(r.homePageURL, "http://my-provider.com/repo1#readme");
+  t.is(r.issuesURL, "http://my-provider.com/repo1/issues");
   const b = await r.branch("master");
   t.is(b.name, "master");
 });

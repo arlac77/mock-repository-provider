@@ -135,7 +135,12 @@ export class MockProvider extends MultiGroupProvider {
       ...super.attributes,
       repositoryName: { default: "owner1/repo1" },
       delay: {
+        type: "number",
         default: 0
+      },
+      base: {
+        type: "string",
+        default: "http://mock-provider.com"
       }
     };
   }
@@ -148,7 +153,7 @@ export class MockProvider extends MultiGroupProvider {
   }
 
   supportsBase(base) {
-    return true;
+    return base === undefined || base === this.base;
   }
 
   async waitDelay(delay = this.delay) {
@@ -159,7 +164,7 @@ export class MockProvider extends MultiGroupProvider {
    * @return {string} 'http://mock-provider.com'
    */
   get url() {
-    return "http://mock-provider.com";
+    return this.base;
   }
 
   /**
@@ -213,7 +218,7 @@ export class MockProvider extends MultiGroupProvider {
 
     if (group == undefined) {
       const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
-      return g ? g.repository(name): undefined;
+      return g ? g.repository(name) : undefined;
     }
 
     return super.repository(name);
@@ -224,7 +229,7 @@ export class MockProvider extends MultiGroupProvider {
 
     if (group == undefined) {
       const g = await this.repositoryGroup(DEFAULT_GROUP_NAME);
-      return g ? g.branch(name): undefined;
+      return g ? g.branch(name) : undefined;
     }
 
     return super.branch(name);
@@ -235,6 +240,5 @@ replaceWithOneTimeExecutionMethod(
   MockProvider.prototype,
   "initializeRepositories"
 );
-
 
 export default MockProvider;
