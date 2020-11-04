@@ -169,10 +169,6 @@ export class MockProvider extends MultiGroupProvider {
     return "mock";
   }
 
-  get repositoryBases() {
-    return [this.url];
-  }
-
   get branchClass() {
     return typeof this.files === "string" ? MockFileSystemBranch : MockBranch;
   }
