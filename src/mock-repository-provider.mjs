@@ -169,6 +169,12 @@ export class MockProvider extends MultiGroupProvider {
     return "mock";
   }
 
+  get repositoryBases() {
+    return super.repositoryBases.concat[
+      `${this.name}:`
+    ];
+  }
+
   get branchClass() {
     return typeof this.files === "string" ? MockFileSystemBranch : MockBranch;
   }
