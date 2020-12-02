@@ -14,6 +14,7 @@ const files = {
   }
 };
 
+test("provider factory name",t => t.is(MockProvider.name, "mock"));
 test("provider repositoryGroup", async t => {
   const provider = new MockProvider(files);
   const g1 = await provider.repositoryGroup("owner1");

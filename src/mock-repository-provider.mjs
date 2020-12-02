@@ -129,6 +129,14 @@ const DEFAULT_GROUP_NAME = "";
  * @param {Object} files
  */
 export class MockProvider extends MultiGroupProvider {
+  /**
+   * We are called mock.
+   * @return {string} mock
+   */
+  static get name() {
+    return "mock";
+  }
+
   static get attributes() {
     return {
       ...super.attributes,
@@ -159,14 +167,6 @@ export class MockProvider extends MultiGroupProvider {
    */
   get url() {
     return this.repositoryBases[0];
-  }
-
-  /**
-   * We are called mock
-   * @return {string} mock
-   */
-  get name() {
-    return "mock";
   }
 
   get branchClass() {
