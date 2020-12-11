@@ -35,7 +35,7 @@
     "content-entry-filesystem": "^2.0.2",
     "globby": "^11.0.1",
     "micromatch": "^4.0.2",
-    "one-time-execution-method": "^2.0.3",
+    "one-time-execution-method": "^2.0.4",
     "repository-provider": "^25.0.10"
   },
   "devDependencies": {
