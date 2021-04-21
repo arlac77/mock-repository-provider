@@ -3,7 +3,7 @@
 [![minified size](https://badgen.net/bundlephobia/min/mock-repository-provider)](https://bundlephobia.com/result?p=mock-repository-provider)
 [![downloads](http://img.shields.io/npm/dm/mock-repository-provider.svg?style=flat-square)](https://npmjs.org/package/mock-repository-provider)
 [![GitHub Issues](https://img.shields.io/github/issues/arlac77/mock-repository-provider.svg?style=flat-square)](https://github.com/arlac77/mock-repository-provider/issues)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fmock-repository-provider%2Fbadge&style=flat)](https://actions-badge.atrox.dev/arlac77/mock-repository-provider/goto)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fmock-repository-provider%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/arlac77/mock-repository-provider/goto)
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/arlac77/mock-repository-provider/badge.svg)](https://snyk.io/test/github/arlac77/mock-repository-provider)
@@ -19,10 +19,10 @@ mocking repository provider
 
 ### Table of Contents
 
--   [MockProvider](#mockprovider)
-    -   [Parameters](#parameters)
-    -   [url](#url)
-    -   [name](#name)
+*   [MockProvider](#mockprovider)
+    *   [Parameters](#parameters)
+    *   [url](#url)
+    *   [name](#name)
 
 ## MockProvider
 
@@ -30,12 +30,12 @@ mocking repository provider
 
 ### Parameters
 
--   `files` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
--   `options`  
+*   `files` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `options`  
 
 ### url
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** '<http://mock-provider.com>'
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'http://mock-provider.com'
 
 ### name
 
