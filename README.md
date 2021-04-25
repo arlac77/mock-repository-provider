@@ -35,7 +35,7 @@ mocking repository provider
 
 ### url
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 'http://mock-provider.com'
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** '<http://mock-provider.com>'
 
 ### name
 
