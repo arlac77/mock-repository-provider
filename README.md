@@ -19,10 +19,17 @@ mocking repository provider
 
 ### Table of Contents
 
+*   [fullName](#fullname)
 *   [MockProvider](#mockprovider)
     *   [Parameters](#parameters)
     *   [url](#url)
     *   [name](#name)
+
+## fullName
+
+Full repository name within the provider.
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** full repo name
 
 ## MockProvider
 
