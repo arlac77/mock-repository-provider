@@ -59,6 +59,18 @@ export class MockRepository extends Repository {
       this.addBranch(name);
     }
   }
+
+  /**
+   * Full repository name within the provider.
+   * @return {string} full repo name
+   */
+  get fullName() {
+    return this.owner === this.provider ||
+      this.owner.name === undefined ||
+      this.owner.name === ""
+      ? this.name
+      : [this.owner.name, this.name].join("/");
+  }
 }
 
 replaceWithOneTimeExecutionMethod(
