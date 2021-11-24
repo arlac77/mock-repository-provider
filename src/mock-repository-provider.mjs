@@ -89,7 +89,7 @@ export class MockFileSystemBranch extends Branch {
 
   async maybeEntry(name) {
     const entry = new FileSystemEntry(name, this.files);
-    if (await entry.getExists()) {
+    if (await entry.isExistent) {
       return entry;
     }
     return undefined;
@@ -97,7 +97,7 @@ export class MockFileSystemBranch extends Branch {
 
   async entry(name) {
     const entry = new FileSystemEntry(name, this.files);
-    if (await entry.getExists()) {
+    if (await entry.isExistent) {
       return entry;
     }
     throw new Error(`Entry not found: ${name}`);

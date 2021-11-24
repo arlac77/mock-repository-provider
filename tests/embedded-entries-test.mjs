@@ -114,7 +114,7 @@ test("repository entry", async t => {
 
   const c = await (await provider.repository("repo1")).entry("aFile");
 
-  t.is(await c.getString(), "content");
+  t.is(await c.string, "content");
   t.true(c.isBlob);
   t.is(c.name, "aFile");
 });
@@ -124,5 +124,5 @@ test("branch entry", async t => {
 
   const c = await (await provider.branch("repo1#master")).entry("aFile");
 
-  t.is(await c.getString(), "content");
+  t.is(await c.string, "content");
 });

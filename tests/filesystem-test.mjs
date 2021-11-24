@@ -29,7 +29,7 @@ test("fs entry", async t => {
   const b = await provider.branch("owner2/repository2#master");
   const c = await b.entry("package.json");
 
-  t.true((await c.getString()).startsWith("{"));
+  t.true((await c.string).startsWith("{"));
   t.true(c.isBlob);
   t.is(c.name, "package.json");
 });
@@ -38,7 +38,7 @@ test("fs maybeEntry", async t => {
   const b = await provider.branch("owner2/repository2#master");
   const c = await b.maybeEntry("package.json");
 
-  t.true((await c.getString()).startsWith("{"));
+  t.true((await c.string).startsWith("{"));
   t.true(c.isBlob);
   t.is(c.name, "package.json");
 });
