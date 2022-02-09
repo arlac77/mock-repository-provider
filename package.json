@@ -34,7 +34,7 @@
     "globby": "^13.0.0",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^2.0.10",
-    "repository-provider": "^26.7.4"
+    "repository-provider": "^26.7.5"
   },
   "devDependencies": {
     "ava": "^4.0.1",
