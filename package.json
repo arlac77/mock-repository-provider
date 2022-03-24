@@ -29,12 +29,12 @@
     "lint:docs": "documentation lint ./src/**/*.mjs"
   },
   "dependencies": {
-    "content-entry": "^4.1.8",
+    "content-entry": "^4.1.9",
     "content-entry-filesystem": "^4.0.7",
     "globby": "^13.1.1",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^2.0.13",
-    "repository-provider": "^27.0.3"
+    "repository-provider": "^27.0.4"
   },
   "devDependencies": {
     "ava": "^4.1.0",
