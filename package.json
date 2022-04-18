@@ -29,7 +29,7 @@
     "lint:docs": "documentation lint ./src/**/*.mjs"
   },
   "dependencies": {
-    "content-entry": "^4.1.9",
+    "content-entry": "^4.1.10",
     "content-entry-filesystem": "^4.0.9",
     "globby": "^13.1.1",
     "micromatch": "^4.0.2",
