@@ -105,7 +105,7 @@ test("provider branch with owner", async t => {
 
   t.is(b.name, "master");
   t.is(b.provider, provider);
-  t.is(b.owner, await provider.repositoryGroup("owner1"));
+  t.is(b.owner.owner, await provider.repositoryGroup("owner1"));
   t.is(b.url, "http://mock-provider.com/owner1/repo2");
 });
 
