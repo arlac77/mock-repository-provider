@@ -29,13 +29,13 @@
     "lint:docs": "documentation lint ./src/**/*.mjs"
   },
   "dependencies": {
-    "content-entry": "^5.0.5",
-    "content-entry-filesystem": "^5.0.4",
+    "content-entry": "^5.0.6",
+    "content-entry-filesystem": "^5.0.5",
     "globby": "^13.1.1",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^3.0.3",
     "repository-provider": "^31.2.6",
-    "repository-provider-test-support": "^2.2.3"
+    "repository-provider-test-support": "^2.2.4"
   },
   "devDependencies": {
     "ava": "^4.3.0",
