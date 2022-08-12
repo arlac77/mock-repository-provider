@@ -29,8 +29,8 @@
     "lint:docs": "documentation lint ./src/**/*.mjs"
   },
   "dependencies": {
-    "content-entry": "^5.2.1",
-    "content-entry-filesystem": "^5.2.3",
+    "content-entry": "^5.2.2",
+    "content-entry-filesystem": "^5.2.4",
     "globby": "^13.1.2",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^3.0.4",
