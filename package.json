@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "content-entry": "^5.2.14",
-    "content-entry-filesystem": "^5.2.7",
+    "content-entry-filesystem": "^5.2.9",
     "globby": "^13.1.2",
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^3.0.4",
