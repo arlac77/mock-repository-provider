@@ -33,7 +33,7 @@
     "content-entry-filesystem": "^5.2.10",
     "globby": "^13.1.2",
     "micromatch": "^4.0.2",
-    "one-time-execution-method": "^3.0.4",
+    "one-time-execution-method": "^3.0.5",
     "repository-provider": "^32.2.1",
     "repository-provider-test-support": "^2.2.18"
   },
