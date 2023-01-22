@@ -34,7 +34,7 @@
     "micromatch": "^4.0.2",
     "one-time-execution-method": "^3.0.6",
     "repository-provider": "^32.6.2",
-    "repository-provider-test-support": "^2.2.35"
+    "repository-provider-test-support": "^2.2.36"
   },
   "devDependencies": {
     "ava": "^5.1.1",
