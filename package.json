@@ -5,13 +5,13 @@
     "access": "public",
     "provenance": true
   },
+  "types": "./types/mock-repository-provider.d.mts",
   "exports": {
     ".": {
-      "types": "./types/mock-repository-provider.d.mts",
-      "default": "./src/mock-repository-provider.mjs"
+      "default": "./src/mock-repository-provider.mjs",
+      "types": "./types/mock-repository-provider.d.mts"
     }
   },
-  "types": "./types/mock-repository-provider.d.mts",
   "description": "mocking repository provider",
   "keywords": [
     "mock",
