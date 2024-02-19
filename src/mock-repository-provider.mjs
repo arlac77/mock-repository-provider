@@ -79,13 +79,6 @@ replaceWithOneTimeExecutionMethod(
 );
 
 export class MockFileSystemBranch extends Branch {
-  async entry(name) {
-    if (this.files[name] === undefined) {
-      throw new Error(`No such entry '${name}'`);
-    }
-
-    return new this.entryClass(name, this.files[name]);
-  }
 
   async maybeEntry(name) {
     const entry = new FileSystemEntry(name, this.files);
