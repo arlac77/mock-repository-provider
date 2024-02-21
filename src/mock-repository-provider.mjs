@@ -6,6 +6,7 @@ import { StringContentEntry } from "content-entry";
 import { FileSystemEntry } from "content-entry-filesystem";
 
 export class MockBranch extends Branch {
+  // @ts-ignore
   async maybeEntry(name) {
     if (this.files[name] === undefined) {
       return undefined;
@@ -14,6 +15,7 @@ export class MockBranch extends Branch {
     return new this.entryClass(name, this.files[name]);
   }
 
+  // @ts-ignore
   async entry(name) {
     if (this.files[name] === undefined) {
       throw new Error(`No such object '${name}'`);
@@ -22,6 +24,8 @@ export class MockBranch extends Branch {
     return new this.entryClass(name, this.files[name]);
   }
 
+  // @ts-ignore
+
   async *entries(patterns = "**/*") {
     for (const name of micromatch(Object.keys(this.files), patterns)) {
       yield new this.entryClass(name, this.files[name]);
@@ -29,6 +33,7 @@ export class MockBranch extends Branch {
   }
 
   get files() {
+    // @ts-ignore
     return this.repository.files[this.name];
   }
 
@@ -37,12 +42,17 @@ export class MockBranch extends Branch {
   }
 }
 
+/**
+ *
+ */
 export class MockRepository extends Repository {
   get files() {
+    // @ts-ignore
     return this.provider.files[this.fullName];
   }
 
   get url() {
+    // @ts-ignore
     return `${this.provider.url}/${this.fullName}`;
   }
 
@@ -79,14 +89,15 @@ replaceWithOneTimeExecutionMethod(
 );
 
 export class MockFileSystemBranch extends Branch {
-
+  // @ts-ignore
   async maybeEntry(name) {
     const entry = new FileSystemEntry(name, this.files);
     if (await entry.isExistent) {
       return entry;
     }
-    return undefined;
   }
+
+  // @ts-ignore
 
   async entry(name) {
     const entry = new FileSystemEntry(name, this.files);
@@ -96,6 +107,7 @@ export class MockFileSystemBranch extends Branch {
     throw new Error(`Entry not found: ${name}`);
   }
 
+  // @ts-ignore
   async *entries(matchingPatterns = ["**/.*", "**/*"]) {
     for (const name of await globby(matchingPatterns, {
       cwd: this.files
@@ -105,6 +117,8 @@ export class MockFileSystemBranch extends Branch {
   }
 
   get files() {
+    // @ts-ignore
+
     return this.provider.files;
   }
 
@@ -115,6 +129,7 @@ export class MockFileSystemBranch extends Branch {
 
 export class MockFileSystemRepository extends Repository {
   get url() {
+    // @ts-ignore
     return `${this.provider.url}/${this.fullName}`;
   }
 
@@ -157,13 +172,16 @@ export class MockProvider extends MultiGroupProvider {
   }
 
   constructor(files, options) {
+    // @ts-ignore
     super(options);
     Object.defineProperty(this, "files", {
       value: files
     });
   }
 
+  // @ts-ignore
   async waitDelay(delay = this.delay) {
+    // @ts-ignore
     return new Promise(resolve => setTimeout(resolve, delay));
   }
 
@@ -174,11 +192,14 @@ export class MockProvider extends MultiGroupProvider {
     return this.repositoryBases[0];
   }
 
+  // @ts-ignore
   get branchClass() {
+    // @ts-ignore
     return typeof this.files === "string" ? MockFileSystemBranch : MockBranch;
   }
 
   get repositoryClass() {
+    // @ts-ignore
     return typeof this.files === "string"
       ? MockFileSystemRepository
       : MockRepository;
@@ -197,9 +218,14 @@ export class MockProvider extends MultiGroupProvider {
       group.addRepository(repoName);
     };
 
+    // @ts-ignore
     if (typeof this.files === "string") {
+      // @ts-ignore
+
       setupRepo(this.repositoryName);
     } else {
+      // @ts-ignore
+
       for (const name of Object.keys(this.files)) {
         setupRepo(name);
       }
