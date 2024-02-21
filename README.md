@@ -20,13 +20,18 @@ mocking repository provider
 
 ### Table of Contents
 
-*   [fullName](#fullname)
+*   [MockRepository](#mockrepository)
+    *   [fullName](#fullname)
 *   [MockProvider](#mockprovider)
     *   [Parameters](#parameters)
     *   [url](#url)
     *   [name](#name)
 
-## fullName
+## MockRepository
+
+**Extends Repository**
+
+### fullName
 
 Full repository name within the provider.
 
