@@ -8,8 +8,8 @@
   "types": "./types/mock-repository-provider.d.mts",
   "exports": {
     ".": {
-      "default": "./src/mock-repository-provider.mjs",
-      "types": "./types/mock-repository-provider.d.mts"
+      "types": "./types/mock-repository-provider.d.mts",
+      "default": "./src/mock-repository-provider.mjs"
     }
   },
   "description": "mocking repository provider",
