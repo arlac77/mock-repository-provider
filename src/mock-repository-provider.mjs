@@ -12,7 +12,7 @@ export class MockBranch extends Branch {
       return undefined;
     }
 
-    return new this.entryClass(name, this.files[name]);
+    return new StringContentEntry(name, undefined, this.files[name]);
   }
 
   // @ts-ignore
@@ -21,24 +21,20 @@ export class MockBranch extends Branch {
       throw new Error(`No such object '${name}'`);
     }
 
-    return new this.entryClass(name, this.files[name]);
+    return new StringContentEntry(name, undefined, this.files[name]);
   }
 
   // @ts-ignore
 
   async *entries(patterns = "**/*") {
     for (const name of micromatch(Object.keys(this.files), patterns)) {
-      yield new this.entryClass(name, this.files[name]);
+      yield new StringContentEntry(name, undefined, this.files[name]);
     }
   }
 
   get files() {
     // @ts-ignore
     return this.repository.files[this.name];
-  }
-
-  get entryClass() {
-    return StringContentEntry;
   }
 }
 
@@ -112,18 +108,13 @@ export class MockFileSystemBranch extends Branch {
     for (const name of await globby(matchingPatterns, {
       cwd: this.files
     })) {
-      yield new this.entryClass(name, this.files);
+      yield new FileSystemEntry(name, this.files);
     }
   }
 
   get files() {
     // @ts-ignore
-
     return this.provider.files;
-  }
-
-  get entryClass() {
-    return FileSystemEntry;
   }
 }
 
