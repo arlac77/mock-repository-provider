@@ -35,7 +35,7 @@
   "dependencies": {
     "content-entry": "^14.2.7",
     "content-entry-filesystem": "^9.0.14",
-    "globby": "^16.0.0",
+    "globby": "^16.1.0",
     "micromatch": "^4.0.8",
     "one-time-execution-method": "^3.1.4",
     "repository-provider": "^36.0.13",
