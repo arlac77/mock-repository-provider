@@ -39,7 +39,7 @@
     "micromatch": "^4.0.8",
     "one-time-execution-method": "^3.1.4",
     "repository-provider": "^37.0.7",
-    "repository-provider-test-support": "^5.0.20"
+    "repository-provider-test-support": "^5.0.21"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
